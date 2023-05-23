@@ -240,7 +240,9 @@ func (t *Transformer) setByField(ctx context.Context, orig reflect.Value, ct *cT
 				case reflect.Map:
 					err = t.setByMap(ctx, current, ct)
 				default:
-					err = ErrInvalidDive
+					if !current.IsNil() {
+						err = ErrInvalidDive
+					}
 				}
 				return
 
